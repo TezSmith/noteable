@@ -1,0 +1,24 @@
+Page 1
+
+O(n) - Big O Notation
+-> Measures how long it takes a function to run
+-> (n) measures how quickly the runtime grows
+
+O(1) is constant time.
+O(n) is linear time.
+O(n2) is quadratic time.
+n can be an actual number or an item in an array
+
+When attempting to figure out the O notation for an algorithm
+-> Throw away the constants
+-> Drop the less significant terms
+-> We're usually talking about the worst case. In general this is O(n) runtime.
+   -> Best case would be O(1) because the function would only run once.
+
+Space Complexity
+-> We want to optimize for using less memory instead of (or in addition to) using less time.
+-> Usually when we talk about space complexity, we're talking about additional space,
+   so we don't include space taken up by inputs.
+
+O(1) is a fixed number of space.
+O(n) space scales with the size of the input.

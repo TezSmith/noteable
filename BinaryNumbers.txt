@@ -1,0 +1,36 @@
+Page 3
+
+Binary Numbers
+-> Computers have bits that can only have two possible values 1 or 0
+-> So to calculate numbers, we have to use a base 2 system
+
+Ex. In decimal or base 10 the number 101 has a value of One Hundred and One,
+    with the 1 in the 100s place, a zero in the 10s place
+    and a 1 in the 1s place.
+
+    But in Binary, the number 101 have a value of Five, with a 1 in the 1s place,
+    a 0 in the 2s place and a 4 in the 100s place.
+
+-> This rule goes for unsigned (or non-negative, whole) numbers.
+
+Here's how other numbers could be stored:
+-> Fractions: Store two numbers: the numerator and the denominator.
+-> Decimals: Also two numbers: 1) the number with the decimal point taken out,
+   and 2) the position where the decimal point goes (how many digits over
+   from the leftmost digit).
+-> Negative Numbers: Reserve the leftmost bit for expressing the sign of the number.
+   0 for positive and 1 for negative.
+
+In reality we usually do something slightly fancier for each of these. But these approaches work,
+and they show how we can express some complex stuff with just 1s and 0s.
+
+Fixed Width Integers
+-> We can express 256 different numbers (2^8)
+-> For storing integers we usually use 4 or 8 bytes. These hold ~4 billion, and 10 billion billions
+   respectively.
+-> Most integers are fixed-width or fixed-length, so the number of bits they take up don't change.
+   * Safe to assume that your integers are always fixed-width, unless you're told otherwise.
+
+Fixed width integers take up constant space (O(1)), because of this, simple math operations take
+up constant time.
+-> Fixed width integers are space and time efficient, but their values are limited.

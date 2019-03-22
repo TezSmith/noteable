@@ -1,0 +1,32 @@
+Page 2
+
+Random Access Memory aka "Working Memory" or "Memory"
+-> code variables are stored here
+-> Do not confuse with Storage (which is where files, programs & apps are kept)
+   Storage is also referred to as Persistent Storage or Disc
+
+RAM has billions of shelves that are denoted by it's Memory Address
+-> A shelf holds 8 bits. A bit is a tiny electrical switch that can be turned
+  on (corresponds with 1) or off (corresponds with 0).
+-> 8 bits = 1 Byte.
+Recap: A shelf of RAM has 8 bits or 1 Byte.
+
+The shelves of RAM are connected to a Memory Controller with is connected to a Processor.
+-> The memory controller does the actual reading and writing of RAM, through a direct connection.
+-> The direct connection gives us access to any address at any time, hence the name RAM.
+
+"Even though the memory controller can jump between far-apart memory addresses quickly,
+programs tend to access memory that's nearby. So computers are tuned to get an extra speed boost
+when reading memory addresses that are close to each other."
+
+The Processor has a series of caches where it reads a copy of things recently read from the RAM.
+-> The cache is much faster to read from that the RAM itself.
+-> When asking for information from a memory address, the Memory Controller also sends back
+  content from other nearby addresses and the Processor puts that stuff in it's cache.
+
+Ex. "If the processor asks for the contents of address 951, then 952, then 953, then 954...
+    it'll go out to RAM once for that first read, and the subsequent reads will come straight
+    from the super-fast cache."
+
+Ex. "But if the processor asks to read address 951, then address 362, then address 419...then
+    the cache won't help, and it'll have to go all the way out to RAM for each read."
