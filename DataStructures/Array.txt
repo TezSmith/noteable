@@ -1,0 +1,112 @@
+Page 4 - Arrays, Strings, Pointers
+
+Arrays
+If we wanted to access information that's stored in array within RAM, we'd have to know two things:
+-> The array's starting address (where the array begins in RAM)
+-> And the index that we're looking for.
+
+Ex. Let's store each day's kombucha consumption in an 8-bit, fixed-width, unsigned integer.
+    And let's store the kombucha counts right next to each other in RAM,
+    starting at memory address 3. So index 0 in our array would be at memory address 3,
+    and index 1 would be at memory address 4, etc. Suppose we wanted to get the kombucha
+    count at index 4 in our array.
+
+    How do we figure out what address in memory to go to? Simple math.
+    Take the array's starting address (3), add the index we're looking for (4),
+    and that's the address of the item we're looking for = (7).
+
+BUT! This is usually not the case. Most numbers are stored within 64 bit integers.
+So how do we build an array of 64-bit (8 byte) integers on top of our 8-bit (1 byte) memory slots?
+We simply give each array index 8 address slots instead of 1.
+
+So we can still use simple math to grab the start of the nth item in our array
+—just gotta throw in some multiplication:
+
+*** Address of nth item in array = address of array start + ( n * size of each item in bytes )
+
+Because the memory controller has a direct connect to RAM, looking up the items in an Array
+takes O(1) time. This fast lookup capability is the most important property of an array.
+
+HOWEVER! The formula we used to get the address of the nth item in our array only works if:
+
+-> Each item in the array is the same size (takes up the same number of bytes).
+-> The array is uninterrupted (contiguous) in memory.
+   Ex. There can't be any gaps in the array...like to "skip over" a memory slot Spotify
+        was already using.
+
+This also puts a constraint on what type of things we can put into our array. Every item
+has to be the same size! Which is hard if other programs are already using an address in RAM.
+
+That's the tradeoff. Arrays have fast lookups O(1) time, but each item in the array needs to be
+the same size, and you need a big block of uninterrupted free memory to store the array.
+
+**********
+
+Strings
+ - Essentially an array of characters.
+ - Characters are mapped to binary numbers and expressed as 8 bit integers.
+   (ie. A is mapped 65 in decimal, which is 01000001 in binary.)
+ - This is called character encoding.
+
+***********
+
+Pointers
+- If you have items within an array that aren't the same size, it throws off the formula
+  to find the nth item in an array.
+- Pointers help us to get around that by allowing us to store array items wherever we can fit
+  them in RAM. Then we'll have each element in our array hold the address in memory of it's
+  corresponding string.
+
+This allows us to have arrays where the items don't have to be the same length &&
+We don't need enough uninterrupted free memory to store all our strings right next
+to one another.
+
+The tradeoff? - This array isn't cache friendly. The memory controller has to take more time
+looking around the RAM for the items. HOWEVER this slowdown isn't reflected in the big O time cost.
+
+************
+
+Dynamic Arrays
+- Computers have to know how much space to reserve for an array, but sometimes we don't
+  know how long an array is going to be ahead of time, so we have to use a dynamic array.
+  (Ex. Think of a word document)
+- Dynamic arrays are programmed to resize themselves when they run out of space.
+
+How it works:
+- When you allocate a dynamic array, your dynamic array implementation makes an underlying
+  static array. The starting size depends on the implementation—let's say our implementation
+  uses 10 indices.
+- Say you append 4 items to your dynamic array:
+- At this point, our dynamic array contains 4 items. It has a length of 4. But the underlying array
+  has a length of 10. We'd say this dynamic array's size is 4 and its capacity is 10.
+- The dynamic array stores an end_index to keep track of where the dynamic array ends
+  and the extra capacity begins.
+- If you keep appending, at some point you'll use up the full capacity of the underlying array
+  Next time you append, the dynamic array implementation will do a few things under the hood
+  to make it work:
+
+    1. Make a new, bigger array. Usually twice as big.
+    2. Copy each element from the old array into the new array.
+    3. Free up the old array.
+    4. Append your new item.
+
+These special appends are called "doubling". Appending an item to an array is usually at O(1)
+time, but a single doubling append is an O(n) time operation.
+- Each append has an average cost (or amortized cost) of O(1)
+- If in an interview we are worried about worst-case time of appends, try to use a normal,
+  non-dynamic array
+
+**** The advantage of dynamic arrays over arrays is that you don't have to specify the size ahead
+of time, the disadvantage is that some appends can be expensive. *****
+
+But what if we wanted the best of both worlds...
+
+
+
+
+
+
+
+
+
+__

@@ -1,0 +1,28 @@
+Page 5 - Linked Lists
+
+Linked Lists
+- Data structure that allows us to store arrays, has fast appends, and doesn't require us
+  to say how long the string will be ahead of time.
+- They are made up of nodes, which are two-item arrays which hold the item itself and a
+  pointer to the next character.
+- The first node of a linked list is called the head, the last node is the tail.
+  (Although some people refers to all nodes that are not the head as the tail)
+
+It's important to have a variable node that points to the head and tail of a list.
+- Comes in handy when you want to prepend and append things to the list.
+  Adding things to the list, happens in O(1) time.
+
+To prepend (and append)
+1. Create the node
+2. Tweak the pointers
+    - Point the head variable to the new node
+      (Or point the tail variable to the new node)
+    - Point the next in the new node to the old head
+      (Have the old last node to the new last node)
+
+*** Linked lists have worst-case O(1) time appends, which is better than the worst-case
+O(n) time of dynamic arrays. Also, linked lists have faster prepends (O(1) time) than dynamic
+arrays (O(n)time). ***
+
+Still regular, non-dynamic arrays are better for storing strings, because arrays have O(1)
+time lookup, because all the elements in an array are right next to each other in memory.

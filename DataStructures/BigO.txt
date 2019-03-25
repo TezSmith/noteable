@@ -1,6 +1,6 @@
-Page 1
+Page 1 - Big O Notation
 
-O(n) - Big O Notation
+Big O Notation
 -> Measures how long it takes a function to run
 -> (n) measures how quickly the runtime grows
 

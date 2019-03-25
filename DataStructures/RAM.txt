@@ -1,4 +1,4 @@
-Page 2
+Page 2 - RA
 
 Random Access Memory aka "Working Memory" or "Memory"
 -> code variables are stored here
