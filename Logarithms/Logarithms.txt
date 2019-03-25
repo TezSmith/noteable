@@ -1,0 +1,213 @@
+Page 8 - Logarithms
+
+Logarithms
+- Logarithms are asking "What power must we raise this base to, in order to get this answer?"
+
+So if we say log#10(100) // 10 is supposed to be in in subscript, so I'm using # as a substitute
+It means, "what power do we need to raise 10 to in order to get 100?""
+The answer is 2.
+
+- The main thing logarithms are used for is solving for x when x is an exponent.
+
+So if we wanted to solve 10^x = 100, we need to bring x down somehow.
+
+And logarithms give us a trick for doing that. We take log#10 of both sides and then simplify.
+Ex. log#10(10^x) = log#10(100
+    x = log#10(100)
+
+******* LOGARITHM RULES ********
+
+Simplification: log#b(b^x) = x // Useful for bringing down an exponent
+
+Multiplication: log#b(x * y) = log#b(x) + log#b(y)
+
+Division: log#b(x/y) = log#b(x) - log#b(y)
+
+Powers: log#b(x^y) = y * log#b(x)
+
+Change of base: log#b(x) = log#c(x)/ log#c(b) // Useful for changing the base of a logarithm
+                                                 from b to c
+
+*********************************
+
+Where logs come up in algorithms and interviews:
+
+"How many times must we double 1 before we get to N?" Or equivalently "How many times must we
+divide n in half in order to get back down to 1."
+
+The answer? O(log#2(N))
+
+It's okay if it's not obvious yet why that's true. We'll derive it with some examples:
+
+********************************
+
+Logarithms In Binary Search
+
+This comes up in the time cost of binary search, which is an algorithm for finding a target
+number in a sorted array. The process goes like this:
+
+1. Start with the middle number: is it bigger or smaller than our target number? Since the array
+   is sorted, this tells us if the target would be in the left half or the right half of our array.
+
+2. We've effectively divided the problem in half. We can "rule out" the whole half of the array
+   that we know doesn't contain the target number.
+
+3. Repeat the same approach (of starting in the middle) on the new half-size problem. Then do it
+   again and again, until we either find the number or "rule out" the whole set.
+
+   Here's what that looks like in JS code:
+
+ function binarySearch(target, nums) {
+     // See if target appears in nums
+
+     // We think of floorIndex and ceilingIndex as "walls" around
+     // the possible positions of our target so by -1 below we mean
+     // to start our wall "to the left" of the 0th index
+     // (we *don't* mean "the last index")
+     let floorIndex = -1;
+     let ceilingIndex = nums.length;
+
+     // If there isn't at least 1 index between floor and ceiling,
+     // we've run out of guesses and the number must not be present
+     while (floorIndex + 1 < ceilingIndex) {
+
+       // Find the index ~halfway between the floor and ceiling
+       // We have to round down to avoid getting a "half index"
+       const distance = ceilingIndex - floorIndex;
+       const halfDistance = Math.floor(distance / 2);
+       const guessIndex = floorIndex + halfDistance;
+
+       const guessValue = nums[guessIndex];
+
+       if (guessValue === target) {
+         return true;
+       }
+
+       if (guessValue > target) {
+
+         // Target is to the left, so move ceiling to the left
+         ceilingIndex = guessIndex;
+       } else {
+
+         // Target is to the right, so move floor to the right
+         floorIndex = guessIndex;
+       }
+     }
+
+     return false;
+   }
+
+So the question is, "how many times must we divide our original array size (n) in half until
+we get down to 1?"
+
+*********************
+
+Logarithms in Sorting
+
+Sorting costs O(n log#2 n) time in general. More specifically, O(n log#2 n) is the best
+worst-case runtime we can get for sorting.
+
+The easiest way to see why is to look at merge sort. In merge sort, the idea is to divide
+the array in half, sort the two halves, and then merge the two sorted halves into one sorted whole.
+
+Here's what it looks like in code:
+
+function mergeSort(arrayToSort) {
+
+  // BASE CASE: arrays with fewer than 2 elements are sorted
+  if (arrayToSort.length < 2) {
+    return arrayToSort;
+  }
+
+  // STEP 1: divide the array in half
+  // We need to round down to avoid getting a "half index"
+  const midIndex = Math.floor(arrayToSort.length / 2);
+
+  const left = arrayToSort.slice(0, midIndex);
+  const right = arrayToSort.slice(midIndex);
+
+  // STEP 2: sort each half
+  const sortedLeft  = mergeSort(left);
+  const sortedRight = mergeSort(right);
+
+  // STEP 3: merge the sorted halves
+  const sortedArray = [];
+  let currentLeftIndex = 0;
+  let currentRightIndex = 0;
+
+  while (sortedArray.length < left.length + right.length) {
+
+    // sortedLeft's first element comes next
+    // if it's less than sortedRight's first
+    // element or if sortedRight is exhausted
+    if (currentLeftIndex < left.length &&
+        (currentRightIndex === right.length ||
+         sortedLeft[currentLeftIndex] < sortedRight[currentRightIndex])) {
+      sortedArray.push(sortedLeft[currentLeftIndex]);
+      currentLeftIndex += 1;
+    } else {
+      sortedArray.push(sortedRight[currentRightIndex]);
+      currentRightIndex += 1;
+    }
+  }
+
+  return sortedArray;
+}
+
+So what's our total time cost? O(n log#2 n)
+
+The log#2n comes from the number of times we have to cut n in half to get down
+to subarrays of just 1 element (our base case). The additional n comes from the time
+cost of merging all n items together each time we merge two sorted subarrays.
+
+***************
+
+Logarithms in Binary Trees
+
+In a binary tree, each node has two or fewer children.
+
+A tree where each level is full is called "perfect".
+
+One question we might ask is, if there are n nodes in total, what's the tree's height (h)
+
+That brings back our refrain, "how many times must we double 1 to get to n?"
+
+But this time, we're not doubling 1 to get to n, n is the total number of nodes in the tree.
+
+The last level has about half of the total number of nodes on the tree.
+If you add up the number of nodes on all the levels except the last one, you get about the number
+of nodes on the last level—1 less.
+
+The exact formula for the number of nodes on the last level is:
+(n+1)/2
+
+So our height is the number of times we hav to double 1 to get to (n+1)/2, which is
+h = log#2((n+1)/2)
+
+One adjustment: Consider a perfect, 2-level tree. There are 2 levels overall,
+but the "number of times we have to double 1 to get to 2" is just 1. Our height is in fact
+one more than our number of doublings. So we add 1:
+h = log#2((n+1)/2) + 1
+
+To simplify this, we can apply some of our logarithm rules:
+h = log#2((n+1)/2)
+h = log#2(n+1) - log#2(2) + 1
+h = log#2(n+1) - 1 + 1
+h = log#2(n+1)
+
+*****************
+
+Conventions with Bases
+
+Sometimes people don't include a base. In comp sci, it's usually implied that the base is 2.
+So log n generally means log#2(n).
+
+There's a specific notation for log base 2 that's sometimes used: lg
+So we could say lg n or (n lg n) which comes up a lot in sorting). We use this notation a lot
+on Interview Cake, but it's worth noting that not everyone uses it.
+
+In big O notation the base is considered a constant. So folks usually don't include it. People
+usually say O(log n), not O(log#2), But people might still use the special notation lg n, as in
+O(lgn). It saves us from having to write an "o" :)
+
+___

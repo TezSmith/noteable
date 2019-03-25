@@ -1,4 +1,4 @@
-Page 3
+Page 3 - Binary Numbers
 
 Binary Numbers
 -> Computers have bits that can only have two possible values 1 or 0
