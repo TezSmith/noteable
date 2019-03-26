@@ -12,7 +12,7 @@ The answer is 2.
 So if we wanted to solve 10^x = 100, we need to bring x down somehow.
 
 And logarithms give us a trick for doing that. We take log#10 of both sides and then simplify.
-Ex. log#10(10^x) = log#10(100
+Ex. log#10(10^x) = log#10(100)
     x = log#10(100)
 
 ******* LOGARITHM RULES ********
