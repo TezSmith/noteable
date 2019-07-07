@@ -20,8 +20,15 @@ To create a component:
    * Can also be written as n g c <component-name> -it -is
 
 To add content to a component:
-  - In the generated file with ending component.ts, inside the "template" key, write backticks. Inside the backticks add your html content.
-  - To add functionality to your content, below in the export Class function, write your functions before the constructor!
+  - First Way
+    * In the generated file with ending component.ts, inside the "template" key, write backticks. Inside the backticks add your html content.
+    * To add functionality to your content, below in the export Class function, write your functions before the constructor!
+  - Second Way
+    * In the generated file with ending component.ts, create a key called "templateUrl", and set it to a value of single quotes.
+    * Inside the single quotes, write component-name.component.html
+    * In your component folder, create a file component-name.component.html. Here you can add the html content that you want.
+    * To add functionality to your content, write your functions in the corresponding component-name.component.ts file before the constructor!
+    
 
 Components can be displayed in App in two ways:
 - First Way (Angular 2)
@@ -35,7 +42,7 @@ Components can be displayed in App in two ways:
 
 ___________
 
-## Forms & Events
+## Forms & Events - Part I
 - To reference a form input, use #<input-name> inside input tag.
 
     Ex. <input #toyName type="text">
@@ -49,4 +56,27 @@ Ex. <button (click)="onClick()">
 - To pass the value of a input field on a button click, get the value like toyName.value. You don't need the #.
 
 - To get the entire event, use $event
+
+___________
+
+## Passing Data
+
+- In order to get data into to component, you have to import   the data, then inside of the class statement create a   variable set to the value of the imported data. Ex:
+    `
+    import { products } from '../products'
+     export class ProductListComponent {
+     products = products;
+    }
+    `
+- To see each element and pass it to a div:
+    * In the current component, use *ngFor to iterate over the items. For Example:
+
+    `<div *ngFor="let item of products">
+      {{ item.name }}
+    </div>
+    `
+
+
+
+
 
