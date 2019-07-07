@@ -13,13 +13,17 @@ To start server
 
 ___________
 
-##Component Creation
+## Component Creation
 
-To create a component 
+To create a component: 
 - ng generate component <component-name> --inline-template --inline-style
    * Can also be written as n g c <component-name> -it -is
 
-Components can be displayed in App in two ways
+To add content to a component:
+  - In the generated file with ending component.ts, inside the "template" key, write backticks. Inside the backticks add your html content.
+  - To add functionality to your content, below in the export Class function, write your functions before the constructor!
+
+Components can be displayed in App in two ways:
 - First Way (Angular 2)
     - Go to app.component.ts
     - Under component, write key labeled template, that's set
@@ -31,8 +35,8 @@ Components can be displayed in App in two ways
 
 ___________
 
-##Forms & Events
-- To reference a form input, use #<input-name> inside input tag
+## Forms & Events
+- To reference a form input, use #<input-name> inside input tag.
 
     Ex. <input #toyName type="text">
 
