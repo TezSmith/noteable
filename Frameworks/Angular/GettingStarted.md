@@ -61,7 +61,7 @@ ___________
 
 ## Passing Data
 
-- In order to get data into to component, you have to import   the data, then inside of the class statement create a   variable set to the value of the imported data. Ex:
+- In order to get data into to component, you have to import the data, then inside of the class statement create a variable set to the value of the imported data. Ex:
     `
     import { products } from '../products'
      export class ProductListComponent {
@@ -76,6 +76,37 @@ ___________
     </div>
     `
 
+- There doesn't have to be a separate component to render data elements. However you can create components that handle logic for an individual element. 
+    * For child components that need to render object specific information, import { Input } from '@angular/core'
+    * In the class function, before the constructor, write @Input() and the singular name of the object that is being iterated over
+    * Last in the component tags where the sub-component is written, bind the property name, and set it equal to the property name in strings.
+
+    Ex. `<app-product-alerts
+          [item]="item">
+        </app-product-alerts>`
+
+- If an event occurs in a child element, and you want to trigger it, you'll have to:
+  * Import { Output, EventEmitter } from '@angular/core'
+
+  * In the class function, write @Output() then create a variable that's set to be a new instance of the Event Emitter.
+
+  Ex. `@Output() notify = new EventEmitter();`
+
+  * In the parent element's class function, write the function that will be triggered during the click event.
+
+  * In first component tag, where the component will be rendered, inside of parenthesis write the name of the variable that's set to be the new instance of the Event Emitter.
+
+    * Ex ` <app-product-alerts
+            [item]="item" (notify)="onNotify()">
+           </app-product-alerts>`
+
+  * Inside of the child component's html file, attach the emit event to html element.
+  
+    * <p *ngIf="item.price > 700">
+         <button (click)="notify.emit()">Notify Me</button>
+      </p>
+
+  
 
 
 
