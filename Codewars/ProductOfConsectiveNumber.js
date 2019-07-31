@@ -20,6 +20,9 @@ Your function productFib takes an integer (prod) and returns an array:
 
 
 function productFib(prod){
+  // Fib sequence isn't necessary here, because of how we initialized our array.
+  
+  
   let a = 0;
   let b = 1;
   for (let i = 0; i < prod; i++) {
