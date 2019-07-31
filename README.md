@@ -4,4 +4,4 @@ An ongoing record of CS Concepts that I've learned and Algorithms that I've solv
 
 ## Coming Soon
 
-A folder for all concepts/tools learned on the job. 
+A folder for all concepts/tools learned on the job. Plus another folder for collected resources!
